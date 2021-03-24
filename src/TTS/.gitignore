@@ -1,2 +1,10 @@
 venv
 .idea
+__pycache__
+tests/__pycache__
+modules/__pycache__
+modules/database/__pycache__
+modules_database/data/*
+modules/database/stress_db/*
+modules/database/zaliznak.txt
+
