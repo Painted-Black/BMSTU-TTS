@@ -4,8 +4,8 @@ from modules.database.db_access_manager import db_access_manager
 from confg import *
 import pickle
 import logging
-from modules.letter_phoneme_transcriptor import LetterPhonemeTranscriptor
-from modules.phoneme_allophone_transcriptor import PhonemeAllophoneTranscriptor
+from modules.phonetic_processor.letter_phoneme_transcriptor import LetterPhonemeTranscriptor
+from modules.phonetic_processor.phoneme_allophone_transcriptor import PhonemeAllophoneTranscriptor
 
 
 class PhoneticProcessor:
@@ -16,7 +16,7 @@ class PhoneticProcessor:
     def process(self, text):
         phonemes = self.lft.transcript(text)
         allophones = self.pat.transcript(phonemes)
-        print(allophones)
+        return allophones
 
     @staticmethod
     def __count_homonyms(morph, stresses) -> int:

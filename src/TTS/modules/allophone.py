@@ -3,7 +3,16 @@ from modules.phoneme import Phoneme
 
 
 class Allophone(ABC):
+    '''
+    type:
+    0 -- гласный
+    1 -- согласный
+    '''
     phoneme = 0
+    type = 1
+
+    def is_vowel(self):
+        return self.type == 0
 
 
 class VowelAllophone(Allophone):
@@ -27,6 +36,10 @@ class VowelAllophone(Allophone):
         self.positional_idx = 0
         self.left_context_idx = 0
         self.right_context_idx = 0
+        self.type = 0
+
+    def is_stressed(self):
+        return self.positional_idx == 0
 
     def set_positional_idx(self, next_phoneme):
         if next_phoneme == '+':
@@ -71,6 +84,7 @@ class ConsonantAllophone(Allophone):
     '''
     def __init__(self):
         self.right_context_idx = 0
+        self.type = 1
 
     def set_right_context_idx(self, right_context, right_contex1):
         if Phoneme.is_pause(right_context) or right_context is None:

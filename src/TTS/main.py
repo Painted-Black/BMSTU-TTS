@@ -1,7 +1,7 @@
 from fill_db import fill_db, parse_consonants_pronunciation, parse_stress_string, parse_abbrev_string
 from confg import *
-from modules.phonetic_processor import PhoneticProcessor
-from modules.phoneme_allophone_transcriptor import PhonemeAllophoneTranscriptor
+from modules.phonetic_processor.phonetic_processor import PhoneticProcessor
+from modules.acoustic_processor.acoustic_processor import AcousticProcessor
 
 
 def load_cons_db():
@@ -17,11 +17,12 @@ def load_abbrev_db():
 
 
 def main():
-    text = "ДО+АРОГО"
-    pt = PhonemeAllophoneTranscriptor()
-    phonemes = ["a", "a"]
-    res = pt.transcript(phonemes)
-    #print(res)
+    text = "ДА+ЙКА_УГАДА+Ю_КТО+ТО_УКРА+Л_ТВО+Й_СЛА+ДКИЙ_РУЛЕ+Т"
+    pt = PhoneticProcessor()
+    res = pt.process(text)
+    ap = AcousticProcessor("./audio_db/", "./output/out.wav", "wav")
+    ap.process(res)
+    print(res)
 
 
 if __name__ == '__main__':

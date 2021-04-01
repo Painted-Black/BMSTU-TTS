@@ -4,10 +4,10 @@ from modules.allophone import VowelAllophone, ConsonantAllophone
 
 class PhonemeAllophoneTranscriptor:
     def transcript(self, phonemes: [str]):
-        allophones = self.vowel_positional_allophones(phonemes)
+        allophones = self.get_allophones(phonemes)
         return allophones
 
-    def vowel_positional_allophones(self, phonemes: [str]):
+    def get_allophones(self, phonemes: [str]):
         allophones = []
         n = len(phonemes)
         for i in range(n):

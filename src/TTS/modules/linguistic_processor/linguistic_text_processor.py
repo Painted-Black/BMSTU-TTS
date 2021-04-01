@@ -4,7 +4,7 @@ from confg import *
 from nltk import tokenize
 from pymorphy2 import MorphAnalyzer
 from pymorphy2.tagset import OpencorporaTag
-from .symbols_base import *
+from modules.symbols_base import *
 from razdel import sentenize, tokenize
 from nltk import word_tokenize
 import re

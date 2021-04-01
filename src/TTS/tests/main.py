@@ -1,7 +1,7 @@
 import unittest
 
 from modules.phonetic_processor import LetterPhonemeTranscriptor
-from modules.phoneme_allophone_transcriptor import PhonemeAllophoneTranscriptor
+from modules.phonetic_processor.phoneme_allophone_transcriptor import PhonemeAllophoneTranscriptor
 
 
 class PhonemeAllophoneTranscriptorCase(unittest.TestCase):
