@@ -1,5 +1,5 @@
 from modules.phoneme import Phoneme
-from modules.allophone import VowelAllophone, ConsonantAllophone
+from modules.allophone import VowelAllophone, ConsonantAllophone, PauseAllophone
 
 
 class PhonemeAllophoneTranscriptor:
@@ -28,6 +28,10 @@ class PhonemeAllophoneTranscriptor:
                 next_phoneme = self.get_symb(i+1, phonemes)
                 next_phoneme1 = self.get_symb(i+2, phonemes)
                 a.set_right_context_idx(next_phoneme, next_phoneme1)
+                allophones.append(a)
+            elif Phoneme.is_pause(phoneme):
+                a = PauseAllophone()
+                a.set_position(phoneme)
                 allophones.append(a)
         return allophones
 

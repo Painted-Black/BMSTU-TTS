@@ -7,12 +7,42 @@ class Allophone(ABC):
     type:
     0 -- гласный
     1 -- согласный
+    2 -- пауза
     '''
     phoneme = 0
     type = 1
 
     def is_vowel(self):
         return self.type == 0
+
+    def is_consonant(self):
+        return self.type == 1
+
+    def is_pause(self):
+        return self.type == 2
+
+
+class PauseAllophone(Allophone):
+    '''
+    0 -- внутрисинтагменная
+    1 -- межсинтагменная
+    '''
+
+    def __init__(self):
+        self.__position = 0
+        self.type = 2
+
+    def is_word_pause(self):
+        return self.__position == 0
+
+    def set_position(self, phoneme: Phoneme):
+        if Phoneme.is_word_pause(phoneme):
+            self.__position = 0
+        elif Phoneme.is_syntagma_pause(phoneme):
+            self.__position = 1
+
+    def __repr__(self):
+        return f"pause_{self.__position}"
 
 
 class VowelAllophone(Allophone):

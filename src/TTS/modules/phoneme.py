@@ -6,7 +6,9 @@ class Phoneme:
                   "j'", "b'", "v'", "g'", "d'", "z'",
                   "l'", "m'", "n'", "r'", "p'",
                   "f'", "k'", "t'", "s'"}
-    Pauses = {"_", "#"}
+    WordPause = {"_"}
+    SyntagmaPause = {"#"}
+    Pauses = WordPause | SyntagmaPause
     Stress = {"+", "="}
     SolidLabial = {"p", "f", "b", "m", "v"}
     FrontMiddleLingual = {"sh", "zh", "r", "t", "c", "s", "d", "z", "n", "l"}
@@ -52,6 +54,14 @@ class Phoneme:
     @staticmethod
     def is_pause(phoneme) -> bool:
         return phoneme in Phoneme.Pauses
+
+    @staticmethod
+    def is_word_pause(phoneme) -> bool:
+        return phoneme in Phoneme.WordPause
+
+    @staticmethod
+    def is_syntagma_pause(phoneme) -> bool:
+        return phoneme in Phoneme.SyntagmaPause
 
     @staticmethod
     def is_stress(phoneme) -> bool:

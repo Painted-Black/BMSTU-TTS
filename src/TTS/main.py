@@ -17,7 +17,7 @@ def load_abbrev_db():
 
 
 def main():
-    text = "ДА+ЙКА_УГАДА+Ю_КТО+ТО_УКРА+Л_ТВО+Й_СЛА+ДКИЙ_РУЛЕ+Т"
+    text = "НИКТО+_ДРУГО+ГО_ИНЕЖДА+Л#"
     pt = PhoneticProcessor()
     res = pt.process(text)
     ap = AcousticProcessor("./audio_db/", "./output/out.wav", "wav")

@@ -2,14 +2,17 @@ from pydub import AudioSegment
 import logging
 import os
 
+
 class WavExtractor:
-    def __init__(self, db_path):
+    def __init__(self, db_path, word_pause_len, synt_pause_len):
         self.db_path = db_path
         self.allophones_dir_name = "allophones_db"
         self.cons_allophones_dir_name = "cons"
         self.vowel_allophones_dir_name = "vowels"
         self.stressed_vowel_suffix = "+"
         self.allophones_path = os.path.join(self.db_path, self.allophones_dir_name)
+        self.__word_pause_len = word_pause_len
+        self.__synt_pause_len = synt_pause_len
 
     def get_wav(self, allophone, _type: int) -> AudioSegment:
         '''
@@ -28,8 +31,17 @@ class WavExtractor:
         wav = None
         if allophone.is_vowel():
             wav = self.__get_vowel(allophone)
-        else:
+        elif allophone.is_consonant():
             wav = self.__get_cons(allophone)
+        else:  # пауза
+            wav = self.__get_pause(allophone)
+        return wav
+
+    def __get_pause(self, allophone) -> AudioSegment:
+        if allophone.is_word_pause():
+            wav = AudioSegment.silent(duration=self.__word_pause_len)
+        else:
+            wav = AudioSegment.silent(duration=self.__synt_pause_len)
         return wav
 
     def __get_cons(self, allophone) -> AudioSegment:
@@ -58,11 +70,11 @@ class WavExtractor:
 
 class AcousticProcessor:
     def __init__(self, db_path, final_audio_path, out_format):
-        self.wav_extractor = WavExtractor(db_path)
         self.final_audio_path = final_audio_path
         self.out_format = out_format
         self.__word_pause_len = 10  # длина паузы между сегментами в синтагме в мс
         self.__syntagma_pause_len = 20  # длина паузы между синтагмами в мс
+        self.wav_extractor = WavExtractor(db_path, self.__word_pause_len, self.__syntagma_pause_len)
 
     word_pause_len = property()
     syntagma_pause_len = property()
