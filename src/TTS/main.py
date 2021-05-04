@@ -1,28 +1,22 @@
-from fill_db import fill_db, parse_consonants_pronunciation, parse_stress_string, parse_abbrev_string
-from confg import *
-from modules.phonetic_processor.phonetic_processor import PhoneticProcessor
-from modules.acoustic_processor.acoustic_processor import AcousticProcessor
 from modules.linguistic_processor.linguistic_text_processor import LinguisticTextProcessor
-
-
-def load_cons_db():
-    fill_db(CONS_FILE_PATH, CONS_DB_NAME, CONS_DB_PATH, parse_consonants_pronunciation)
-
-
-def load_stress_db():
-    fill_db(ZALIZNAK_STRESS_FILE_PATH, STRESS_DB_NAME, STRESS_DB_PATH, parse_stress_string)
-
-
-def load_abbrev_db():
-    fill_db(ABBREV_FILE_PATH, ABBREV_DB_NAME, ABBREV_DB_PATH, parse_abbrev_string)
+from modules.linguistic_processor.phonetix_exceptions_processor import PhonetixExceptionsProcessor
+from confg import *
+from modules.database.db_access_manager import db_access_manager
+from db_load import load_jo_db
 
 
 def main():
-    lp = LinguisticTextProcessor()
-    text = "Тест извлечения предложений. " \
-           "Это приемная комиссия ВШЭ? " \
-           "Текст от ГИБДД со скобками! "
-    res = lp.process(text)
+    load_jo_db()
+    return
+    abbrev_db_connection = db_access_manager.create_db(PH_EXC_DB_PATH, PH_EXC_DB_NAME)
+    pep = PhonetixExceptionsProcessor(abbrev_db_connection)
+    res = pep.process(['исключе+ния', 'моде+ль', 'тельави+ва'])
+    print(res)
+    #lp = LinguisticTextProcessor()
+    #text = "Тест извлечения предложений. " \
+    #       "Это приемная комиссия ВШЭ? " \
+    #       "Текст от ГИБДД со скобками! "
+    #res = lp.process(text)
     #text = "НИКТО+_ДРУГО+ГО_ИНЕЖДА+Л#"
     #pt = PhoneticProcessor()
     #res = pt.process(text)

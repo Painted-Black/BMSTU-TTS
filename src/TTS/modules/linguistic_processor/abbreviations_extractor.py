@@ -24,7 +24,7 @@ class AbbreviationsExtractor:
 
     def __parse_abbrevs(self, sents):
         if self.abbrev_db_connection is None or self.cons_db_connection is None:
-            logging.error('Unable to connect to database {} at {}'.format(ABBREV_DB_NAME, ABBREV_DB_PATH))
+            logging.error('Unable to connect to abbreviations database')
             return None
         for sent in sents:
             n = len(sent.words)
