@@ -1,6 +1,6 @@
 import unittest
 
-from modules.phonetic_processor import LetterPhonemeTranscriptor
+from modules.phonetic_processor.phonetic_processor import LetterPhonemeTranscriptor
 from modules.phonetic_processor.phoneme_allophone_transcriptor import PhonemeAllophoneTranscriptor
 
 
@@ -18,12 +18,12 @@ class PhonemeAllophoneTranscriptorCase(unittest.TestCase):
                     ["#", "a", "#"], ["#", "o", "#"], ["#", "u", "#"], ["#", "i", "#"], ["#", "e", "#"], ["#", "y", "#"],
                     ["a", "+"], ["o", "+"], ["u", "+"], ["i", "+"], ["e", "+"], ["y", "+"]]
         results = [["a_100"], ["o_100"], ["u_100"], ["i_100"], ["e_100"], ["y_100"],
-                   ["a_100"], ["o_100"], ["u_100"], ["i_100"], ["e_100"], ["y_100"],
-                   ["a_100"], ["o_100"], ["u_100"], ["i_100"], ["e_100"], ["y_100"],
-                   ["a_100"], ["o_100"], ["u_100"], ["i_100"], ["e_100"], ["y_100"],
-                   ["a_100"], ["o_100"], ["u_100"], ["i_100"], ["e_100"], ["y_100"],
-                   ["a_100"], ["o_100"], ["u_100"], ["i_100"], ["e_100"], ["y_100"],
-                   ["a_100"], ["o_100"], ["u_100"], ["i_100"], ["e_100"], ["y_100"],
+                   ["pause_0", "a_100"], ["pause_0", "o_100"], ["pause_0", "u_100"], ["pause_0", "i_100"], ["pause_0", "e_100"], ["pause_0", "y_100"],
+                   ["pause_1", "a_100"], ["pause_1", "o_100"], ["pause_1", "u_100"], ["pause_1", "i_100"], ["pause_1", "e_100"], ["pause_1", "y_100"],
+                   ["a_100", "pause_0"], ["o_100", "pause_0"], ["u_100", "pause_0"], ["i_100", "pause_0"], ["e_100", "pause_0"], ["y_100", "pause_0"],
+                   ["a_100", "pause_1"], ["o_100", "pause_1"], ["u_100", "pause_1"], ["i_100", "pause_1"], ["e_100", "pause_1"], ["y_100", "pause_1"],
+                   ["pause_0", "a_100", "pause_0"], ["pause_0", "o_100", "pause_0"], ["pause_0", "u_100", "pause_0"], ["pause_0", "i_100", "pause_0"], ["pause_0", "e_100", "pause_0"], ["pause_0", "y_100", "pause_0"],
+                   ["pause_1", "a_100", "pause_1"], ["pause_1", "o_100", "pause_1"], ["pause_1", "u_100", "pause_1"], ["pause_1", "i_100", "pause_1"], ["pause_1", "e_100", "pause_1"], ["pause_1", "y_100", "pause_1"],
                    ["a_000"], ["o_000"], ["u_000"], ["i_000"], ["e_000"], ["y_000"]]
         self.__run_test_cases(phonemes, results, "test_single_vowel")
 
@@ -35,8 +35,8 @@ class PhonemeAllophoneTranscriptorCase(unittest.TestCase):
                     ["k", "a"], ["k", "a", "+"],
                     ["k'", "a"], ["k'", "a", "+"]]
         results = [["p_3", "a_110"], ["p_4", "a_010"],
-                   ["p_3", "a_110"], ["p_4", "a_010"],
-                   ["p_3", "a_110"], ["p_4", "a_010"],
+                   ["pause_0", "p_3", "a_110"], ["pause_0", "p_4", "a_010"],
+                   ["pause_1", "p_3", "a_110"], ["pause_1", "p_4", "a_010"],
                    ["sh_3", "a_120"], ["sh_4", "a_020"],
                    ["k_3", "a_130"], ["k_4", "a_030"],
                    ["k'_3", "a_140"], ["k'_4", "a_040"]]
@@ -49,8 +49,8 @@ class PhonemeAllophoneTranscriptorCase(unittest.TestCase):
                     ["a", "t"], ["a", "+", "t"],
                     ["a", "t'"], ["a", "+", "t'"]]
         results = [["a_101", "p_0"], ["a_001", "p_0"],
-                   ["a_101", "p_0"], ["a_001", "p_0"],
-                   ["a_101", "p_0"], ["a_001", "p_0"],
+                   ["a_101", "p_0", "pause_0"], ["a_001", "p_0", "pause_0"],
+                   ["a_101", "p_0"], ["a_001", "p_0", "pause_1"],
                    ["a_102", "t_0"], ["a_002", "t_0"],
                    ["a_103", "t'_0"], ["a_003", "t'_0"]]
         self.__run_test_cases(phonemes, results, "test_vowel_right_context")
@@ -85,8 +85,8 @@ class PhonemeAllophoneTranscriptorCase(unittest.TestCase):
     def test_single_consonant(self):
         phonemes = [["p"], ["p", "_"], ["p", "#"],
                     ["p'"], ["p'", "_"], ["p'", "#"]]
-        results = [["p_0"], ["p_0"], ["p_0"],
-                   ["p'_0"], ["p'_0"], ["p'_0"]]
+        results = [["p_0"], ["p_0", "pause_0"], ["p_0", "pause_1"],
+                   ["p'_0"], ["p'_0", "pause_0"], ["p'_0", "pause_1"]]
         self.__run_test_cases(phonemes, results, "test_single_consonant")
 
     def test_right_context_consonant(self):

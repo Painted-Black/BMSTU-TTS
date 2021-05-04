@@ -2,6 +2,7 @@ from fill_db import fill_db, parse_consonants_pronunciation, parse_stress_string
 from confg import *
 from modules.phonetic_processor.phonetic_processor import PhoneticProcessor
 from modules.acoustic_processor.acoustic_processor import AcousticProcessor
+from modules.linguistic_processor.linguistic_text_processor import LinguisticTextProcessor
 
 
 def load_cons_db():
@@ -17,12 +18,17 @@ def load_abbrev_db():
 
 
 def main():
-    text = "НИКТО+_ДРУГО+ГО_ИНЕЖДА+Л#"
-    pt = PhoneticProcessor()
-    res = pt.process(text)
-    ap = AcousticProcessor("./audio_db/", "./output/out.wav", "wav")
-    ap.process(res)
-    print(res)
+    lp = LinguisticTextProcessor()
+    text = "Тест извлечения предложений. " \
+           "Это приемная комиссия ВШЭ? " \
+           "Текст от ГИБДД со скобками! "
+    res = lp.process(text)
+    #text = "НИКТО+_ДРУГО+ГО_ИНЕЖДА+Л#"
+    #pt = PhoneticProcessor()
+    #res = pt.process(text)
+    #ap = AcousticProcessor("./audio_db/", "./output/out.wav", "wav")
+    #ap.process(res)
+    #print(res)
 
 
 if __name__ == '__main__':

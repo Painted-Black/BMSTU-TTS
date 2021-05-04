@@ -55,44 +55,6 @@ class Reduction:
         return True
 
 
-class ReductionsAccessManager:
-    __filename = './modules/database/data/reductions'
-
-    def parse_reduction(self, text):
-        buff = text.split('><')
-        if len(buff) != 2:
-            logging.error('Error while parsing reductions db file: ' + text + ' ?')
-            return None
-        buff[0] = buff[0].lstrip('<')
-        buff[1] = buff[1].rstrip('>')
-        decodings = buff[1].split(',')
-
-        if len(decodings) == 1 and len(decodings[0]) == 0:
-            logging.error('Error while parsing reductions db file: ' + text + ' ?')
-            return None
-        for i in range(len(decodings)):
-            decodings[i] = decodings[i].strip()
-        reduction = Reduction()
-        if reduction.build(buff[0], decodings) is False:
-            logging.error('Error while parsing reductions db file: ' + text + ' ?')
-        return reduction
-
-    def find(self, red):
-        with open(self.__filename, 'r', encoding='utf8') as f:
-            run = True
-            reduction = None
-            while run:
-                text = f.readline()
-                if len(text) == 0:
-                    run = False
-                else:
-                    cur_reduction = self.parse_reduction(text)
-                    if cur_reduction.name == red:
-                        run = False
-                        reduction = cur_reduction
-        return reduction
-
-
 class AbberviationsAccessManager:
     __filename = 'data/abbreviations'
 
