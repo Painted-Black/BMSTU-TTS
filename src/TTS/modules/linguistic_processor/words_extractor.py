@@ -1,4 +1,4 @@
-from modules.linguistic_processor.sentence import Sentence
+from modules.sentence import Sentence
 from nltk import word_tokenize
 from modules.linguistic_processor.symbols_base import contains_only_consonants, count_vowels
 
