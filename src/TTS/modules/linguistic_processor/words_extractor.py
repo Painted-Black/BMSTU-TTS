@@ -1,26 +1,31 @@
 from modules.linguistic_processor.sentence import Sentence
 from nltk import word_tokenize
+from modules.linguistic_processor.symbols_base import contains_only_consonants, count_vowels
+import re
 
 
 class WordsExtractor:
     InitialsPattern = r"((\b[А-ЯЁ]\.) *([А-ЯЁ]\b\.)?)"
+    HyphenParticlePattern = r"(-[а-яё]+)"
 
     def split_words(self, sents: [Sentence]):
         n = len(sents)
         for i in range(n):
             buf = word_tokenize(sents[i].raw_data)
-            buf = self.__remove_punct_marks(buf)
-            buf = self.__lower_words(buf)
             sents[i].words = buf
 
-    def __lower_words(self, words: [str]) -> [str]:
-        for i in range(len(words)):
-            words[i] = words[i].lower()
-        return words
-
-    def __remove_punct_marks(self, words: [str]) -> [str]:
-        res = []
-        for w in words:
-            if w.isalpha() is True:
-                res.append(w)
-        return res
+    @staticmethod
+    def is_service_word(word: str, part_of_speech: str) -> bool:
+        if word == "либо" or word == "нибудь":
+            return True
+        if part_of_speech == "PREP":
+            if contains_only_consonants(word):
+                return True
+            if count_vowels(word) == 1:
+                return True
+        if part_of_speech == "PRCL":
+            if word == "б" or word == "ж" or word == "ль":
+                return True
+            if count_vowels(word) == 1:
+                return True
+        return False

@@ -39,6 +39,14 @@ def is_consonant(sound) -> bool:
     return (any(x == sound for x in RussianConsonants)) or (any(x == sound for x in RussianUpperConsonants))
 
 
+def count_vowels(word: str) -> int:
+    count = 0
+    for letter in word:
+        if is_vowel(letter) is True:
+            count += 1
+    return count
+
+
 def contains_only_consonants(s: str) -> bool:
     res = True
     idx = 0

@@ -8,7 +8,8 @@ class Sentence:
     raw_data = ""
     words = []
     phonetic_words = []
-    tagged_words = []
+    stressed_words = []
+    tags = []
 
     def __init__(self, text: str):
         self.raw_data = text.strip()

@@ -1,7 +1,7 @@
 import pickle
 import logging
 import re
-from modules.symbols_base import *
+from modules.linguistic_processor.symbols_base import *
 
 
 class AbbreviationsExtractor:
@@ -46,6 +46,8 @@ class AbbreviationsExtractor:
                         pronunciation = self.__pronounce_unknown_abbrev(abbr)
                     if pronunciation is not None:
                         sent.words[i] = pronunciation
+                        sent.tags[i].is_abbrev = True
+                        sent.tags[i].is_stressed = False
         return sents
 
     def __pronounce_unknown_abbrev(self, abbr) -> str:
