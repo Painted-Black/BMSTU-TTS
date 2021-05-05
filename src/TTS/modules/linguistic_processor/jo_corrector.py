@@ -1,7 +1,4 @@
-import logging
 from pymorphy2 import MorphAnalyzer
-import pickle
-from pymorphy2.tagset import OpencorporaTag
 
 
 class JoCorrector:

@@ -1,5 +1,5 @@
 from razdel import sentenize
-from modules.linguistic_processor.sentence import Sentence
+from modules.sentence import Sentence
 
 
 class SentenceExtractor:

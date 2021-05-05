@@ -69,11 +69,11 @@ class WavExtractor:
 
 
 class AcousticProcessor:
-    def __init__(self, db_path, final_audio_path, out_format):
+    def __init__(self, db_path, final_audio_path, out_format, word_pause_len, synt_pause_len):
         self.final_audio_path = final_audio_path
         self.out_format = out_format
-        self.__word_pause_len = 10  # длина паузы между сегментами в синтагме в мс
-        self.__syntagma_pause_len = 20  # длина паузы между синтагмами в мс
+        self.__word_pause_len = word_pause_len  # длина паузы между сегментами в синтагме в мс
+        self.__syntagma_pause_len = synt_pause_len  # длина паузы между синтагмами в мс
         self.wav_extractor = WavExtractor(db_path, self.__word_pause_len, self.__syntagma_pause_len)
 
     word_pause_len = property()

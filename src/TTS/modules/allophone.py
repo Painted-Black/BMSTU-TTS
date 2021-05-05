@@ -3,12 +3,12 @@ from modules.phoneme import Phoneme
 
 
 class Allophone(ABC):
-    '''
+    """
     type:
     0 -- гласный
     1 -- согласный
     2 -- пауза
-    '''
+    """
     phoneme = 0
     type = 1
 
@@ -23,10 +23,10 @@ class Allophone(ABC):
 
 
 class PauseAllophone(Allophone):
-    '''
+    """
     0 -- внутрисинтагменная
     1 -- межсинтагменная
-    '''
+    """
 
     def __init__(self):
         self.__position = 0
@@ -46,7 +46,7 @@ class PauseAllophone(Allophone):
 
 
 class VowelAllophone(Allophone):
-    '''
+    """
     Позиционный индекс:
         0 -- ударный
         1 -- безударный
@@ -61,7 +61,7 @@ class VowelAllophone(Allophone):
         1 -- перед губными согласными
         2 -- перед переднеязычными и заднеязычными твёрдыми согласными и гласными /У/, /О/, /А/, /Э/, /Ы/
         3 -- перед мягкими согласными и гласной /И/
-    '''
+    """
     def __init__(self):
         self.positional_idx = 0
         self.left_context_idx = 0

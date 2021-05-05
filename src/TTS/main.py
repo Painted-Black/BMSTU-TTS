@@ -1,9 +1,10 @@
 from modules.linguistic_processor.linguistic_text_processor import LinguisticTextProcessor
-from db_load import load_stress_db
+from modules.prosodic_processor.sentence_to_syntagma_converter import SentenceToSyntagmaConverter
 
 
 def main():
     lp = LinguisticTextProcessor()
+    stsc = SentenceToSyntagmaConverter()
     s = lp.init()
     if s is False:
         print("Error")
@@ -13,6 +14,8 @@ def main():
     #       "Это дескать приемная комиссия ВШЭ? " \
     #       "Текст от ГИБДД со скобками! "
     res = lp.process(text)
+    s = stsc.convert(res)
+    print(s)
     #for s in res:
     #    print(s.stressed_words)
     #text = "НИКТО+_ДРУГО+ГО_ИНЕЖДА+Л#"
