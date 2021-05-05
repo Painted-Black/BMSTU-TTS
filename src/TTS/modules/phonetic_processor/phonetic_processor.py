@@ -30,7 +30,6 @@ class PhoneticProcessor:
 
     @staticmethod
     def __remove_homonymy(morph, stresses):
-        #logging.warning("Homonymy removal is now not supported")
         stress = None
         analyzer = MorphAnalyzer()
         homonyms = []
