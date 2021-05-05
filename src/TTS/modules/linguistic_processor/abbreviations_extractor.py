@@ -1,7 +1,7 @@
 import pickle
 import logging
 import re
-from modules.symbols_base import *
+from modules.linguistic_processor.symbols_base import *
 
 
 class AbbreviationsExtractor:
@@ -24,7 +24,7 @@ class AbbreviationsExtractor:
 
     def __parse_abbrevs(self, sents):
         if self.abbrev_db_connection is None or self.cons_db_connection is None:
-            logging.error('Unable to connect to database {} at {}'.format(ABBREV_DB_NAME, ABBREV_DB_PATH))
+            logging.error('Unable to connect to abbreviations database')
             return None
         for sent in sents:
             n = len(sent.words)
@@ -46,6 +46,8 @@ class AbbreviationsExtractor:
                         pronunciation = self.__pronounce_unknown_abbrev(abbr)
                     if pronunciation is not None:
                         sent.words[i] = pronunciation
+                        sent.tags[i].is_abbrev = True
+                        sent.tags[i].is_stressed = False
         return sents
 
     def __pronounce_unknown_abbrev(self, abbr) -> str:

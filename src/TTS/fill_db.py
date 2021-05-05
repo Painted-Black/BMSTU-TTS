@@ -1,6 +1,5 @@
 from modules.database.db_access_manager import db_access_manager
 import logging
-import os
 import pickle
 from confg import *
 
@@ -15,6 +14,32 @@ def parse_consonants_pronunciation(string: str) -> (str, []):
     if len(values) < 1:
         return None, None
     return key, [values]
+
+
+def parse_ph_exc_string(string: str) -> (str, str):
+    string = string.rstrip('\n')
+    buffer = string.split(' ')
+    if len(buffer) != 2:
+        return None, None
+    key = buffer[0]
+    value = buffer[1]
+    key = key.strip()
+    value = value.strip()
+    return key, value
+
+
+def parse_jo_string(string: str) -> (str, []):
+    string = string.rstrip('\n')
+    buffer = string.split('#')
+    if len(buffer) != 2:
+        return None, None
+    buffer[1] = buffer[1].strip('\n')
+    key = buffer[0]
+    value_buff = buffer[1]
+    values = value_buff.split(',')
+    for i in range(len(values)):
+        values[i] = values[i].strip()
+    return key, values
 
 
 def parse_stress_string(string: str) -> (str, []):
@@ -73,8 +98,9 @@ def fill_db(filename: str, dbname: str, db_path: str, parse_func) -> bool:
             db_contains = database.read(pickle.dumps(key))
             if db_contains is not None:
                 old_value = pickle.loads(db_contains)
-                old_value.append(value[0])
-                value = old_value
+                if isinstance(old_value, list):
+                    old_value.append(value[0])
+                    value = old_value
             database.write(pickle.dumps(key), pickle.dumps(value))
             line = source_file.readline()
             idx += 1
