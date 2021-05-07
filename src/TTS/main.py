@@ -7,7 +7,7 @@ def main():
     lp = LinguisticTextProcessor()
     stsc = SentenceToSyntagmaConverter()
     pp = PhoneticProcessor()
-    res = pp.process("КОЛОЯ")
+    res = pp.process("МАЯЛС")
     #s = lp.init()
     #if s is False:
     #    print("Error")

@@ -1,5 +1,6 @@
 from abc import ABC
 from modules.allophone import Allophone
+from modules.phonetic_processor.open_syllable_unit import OpenSyllableUnit
 
 
 class SyllabicUnit(ABC):
@@ -93,7 +94,13 @@ class SyllabicUnit(ABC):
             else:
                 break
         if idx is not None:
-            new_syllable = syllable[idx + 1:]
+            tmp_new_syllable = syllable[idx + 1:]
+            if len(tmp_new_syllable) == 0 or \
+                    (len(tmp_new_syllable) != 0 and OpenSyllableUnit().count_vowels(tmp_new_syllable) > 0):
+                new_syllable = tmp_new_syllable
+            else:
+                new_syllable = syllable
+                to_remove = []
         else:
             new_syllable = syllable
             to_remove = []
