@@ -1,6 +1,7 @@
 from modules.allophone import Allophone
 from modules.phonetic_processor.syllabic_complex import SyllabicUnit
 from modules.phonetic_processor.syllabic_complex2_unit import SyllabicComplex2Unit
+from modules.phonetic_processor.open_syllable_unit import OpenSyllableUnit
 
 
 class SyllabicComplex3Unit(SyllabicUnit):
@@ -11,7 +12,7 @@ class SyllabicComplex3Unit(SyllabicUnit):
     def process_by_word(self, allophones: [Allophone]) -> [[[Allophone]]]:
         syllables = self.__sc2u.process_by_word(allophones)
         self.__process(syllables)
-        print(syllables)
+        return syllables
 
     def __process(self, syllables: [[[Allophone]]]):
         self.__correct_sonant_not_stressed(syllables)
@@ -23,7 +24,6 @@ class SyllabicComplex3Unit(SyllabicUnit):
     def process_by_sintagmas(self, allophones: [Allophone]) -> [[[Allophone]]]:
         syllables = self.__sc2u.process_by_sintagmas(allophones)
         self.__process(syllables)
-        print(syllables)
         return syllables
 
     def __correct_sonant_not_stressed(self, syllables: [[[Allophone]]]) -> [[[Allophone]]]:
@@ -62,8 +62,15 @@ class SyllabicComplex3Unit(SyllabicUnit):
                 break
             else:
                 break
+
         if idx is not None:
-            new_syllable = syllable[idx + 1:]
+            tmp_new_syllable = syllable[idx + 1:]
+            if len(tmp_new_syllable) == 0 or \
+                    (len(tmp_new_syllable) != 0 and OpenSyllableUnit().count_vowels(tmp_new_syllable) > 0):
+                new_syllable = tmp_new_syllable
+            else:
+                new_syllable = syllable
+                to_remove = []
         else:
             new_syllable = syllable
         return to_remove, new_syllable

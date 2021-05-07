@@ -9,10 +9,11 @@ class PhoneticProcessor:
     def __init__(self):
         self.__lft = LetterPhonemeTranscriptor()
         self.__pat = PhonemeAllophoneTranscriptor()
-        self.__sc3 = SyllabicComplex3Unit()
+        self.__sc3 = SyllabicComplex1Unit()
 
     def process(self, text):
         phonemes = self.__lft.transcript(text)
         allophones = self.__pat.transcript(phonemes)
         syllable_1 = self.__sc3.process_by_word(allophones)
+        print(syllable_1)
         return allophones
