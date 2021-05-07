@@ -3,6 +3,7 @@ from modules.sentence import Sentence
 WordsDelim = "_"
 SyntDelim = "#"
 
+
 class SentenceToSyntagmaConverter:
     @staticmethod
     def convert(sentences: [Sentence]) -> [str]:

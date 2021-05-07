@@ -72,7 +72,7 @@ class VowelAllophone(Allophone):
         return self.positional_idx == 0
 
     def set_positional_idx(self, next_phoneme):
-        if next_phoneme == '+':
+        if next_phoneme == '+' or next_phoneme == '=':
             self.positional_idx = 0
         else:
             self.positional_idx = 1
