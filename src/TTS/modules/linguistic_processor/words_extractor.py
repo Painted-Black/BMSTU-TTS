@@ -1,6 +1,7 @@
 from modules.sentence import Sentence
 from nltk import word_tokenize
 from modules.linguistic_processor.symbols_base import contains_only_consonants, count_vowels
+from modules.linguistic_processor.symbols_base import PunctuationMarks
 
 
 class WordsExtractor:
@@ -11,7 +12,11 @@ class WordsExtractor:
         n = len(sents)
         for i in range(n):
             buf = word_tokenize(sents[i].raw_data)
-            sents[i].words = buf
+            corrected_buf = []
+            for b in buf:
+                if not (len(b) == 1 and b[0] in PunctuationMarks):
+                    corrected_buf.append(b)
+                sents[i].words = corrected_buf
 
     @staticmethod
     def is_service_word(word: str, part_of_speech: str) -> bool:

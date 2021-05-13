@@ -147,12 +147,6 @@ class LinguisticTextProcessor:
                 prev_space = True
         return new_text
 
-    def __remove_unnecessary_punctuation_marks(self, words):
-        for sent in words:
-            for word in sent:
-                print(word)
-        return words
-
     def __symb_is_permissible(self, symb) -> bool:
         res = False
         res |= any(x == symb for x in RussianLower)

@@ -31,7 +31,7 @@ class PhoneticWordsFormationUnit:
                 new_phonetic_words.append(word)
             else:
                 n = len(new_phonetic_words) - 1
-                if m >= 0:
+                if n >= 0:
                     new_phonetic_words[n] = word + new_phonetic_words[n]
         new_phonetic_words.reverse()
         return new_phonetic_words

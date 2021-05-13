@@ -24,15 +24,23 @@ class StressMarker:
 
     def __get_stress(self, tag):
         res = None
-        stress_forms = self.stress_db_connection.read(pickle.dumps(tag.normal_form))
-        if stress_forms is not None:
-            stress_forms = pickle.loads(stress_forms)
-            res = self.__chose_stress(stress_forms, tag)
-            if res is None:
-                res = self.__stress_unknown_word(tag.item)
+        if 'ё' in tag.item:
+            res = self.__mark_jo_stress(tag.item)
         else:
-            res = self.__stress_unknown_word(tag.item)
+            stress_forms = self.stress_db_connection.read(pickle.dumps(tag.normal_form))
+            if stress_forms is not None:
+                stress_forms = pickle.loads(stress_forms)
+                res = self.__chose_stress(stress_forms, tag)
+                if res is None:
+                    res = self.__stress_unknown_word(tag.item)
+            else:
+                res = self.__stress_unknown_word(tag.item)
         return res
+
+    def __mark_jo_stress(self, word: str) -> str:
+        jo_idx = word.find('ё')
+        stress = word[:jo_idx+1] + "+" + word[jo_idx+1:]
+        return stress
 
     def __chose_stress(self, stress_forms, morph) -> str:
         analyzer = MorphAnalyzer()
@@ -42,7 +50,7 @@ class StressMarker:
             s_form = stress_form[0].replace(self.main_stress_mark, '')
             s_form = s_form.replace(self.secondary_stress_mark, '')
             stress_tag = analyzer.parse(s_form)[0].tag
-            if stress_tag == morph.tag:
+            if stress_tag.POS == morph.tag.POS or len(stress_forms) == 1:
                 chosen_form = stress_form
         if chosen_form is None:
             return None

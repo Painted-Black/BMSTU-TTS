@@ -14,6 +14,6 @@ if __name__ == '__main__':
     pat_suite = test_loader.loadTestsFromModule(tests.phoneme_allophone_transcriptor_test)
 
     test_runner.run(syllable_suite)
-    #test_runner.run(lpt_suite)
-    #test_runner.run(pat_suite)
+    test_runner.run(lpt_suite)
+    test_runner.run(pat_suite)
     # unittest.main()

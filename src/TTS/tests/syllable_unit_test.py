@@ -117,7 +117,7 @@ class SyllableComplex2UnitCase(unittest.TestCase):
         self.__lft = LetterPhonemeTranscriptor()
         self.__pat = PhonemeAllophoneTranscriptor()
 
-    def _test_two_sonants_by_word(self):
+    def test_two_sonants_by_word(self):
         texts = ["МА+ЙКА", "МА+ЙНА", "ЖА+РКО", "МА+ЙК", "РМА+ДА", "АРМА+ДА"]
         allophones = []
         for text in texts:
@@ -147,7 +147,7 @@ class SyllableComplex1UnitCase(unittest.TestCase):
         self.__lft = LetterPhonemeTranscriptor()
         self.__pat = PhonemeAllophoneTranscriptor()
 
-    def _test_single_vowel_syllable(self):
+    def test_single_vowel_syllable(self):
         texts = ["АЛЛОФО+Н", "АЯ+КС"]
         allophones = []
         for text in texts:
@@ -163,7 +163,7 @@ class SyllableComplex1UnitCase(unittest.TestCase):
             print("Test {0} failed".format("test_single_vowel_syllable"))
             raise AssertionError
 
-    def _test_ja(self):
+    def test_ja(self):
         texts = ["ТАКА+Я", "ЛИ+НИЯ", "Я+МА", "РА=ДИОА=ЭРОНАВИГА+ЦИЯ"]
         allophones = []
         for text in texts:
@@ -182,7 +182,7 @@ class SyllableComplex1UnitCase(unittest.TestCase):
             print("Test {0} failed".format("test_ja"))
             raise AssertionError
 
-    def _test_vowels_sequence_by_word(self):
+    def test_vowels_sequence_by_word(self):
         texts = ["НАИ+ВНЫЙ", "ДИОРА+МА", "БО+А", "РА=ДИОА=ЭРОНАВИГА+ЦИЯ"]
         allophones = []
         for text in texts:
