@@ -12,12 +12,16 @@ class MorphTagger:
         n = len(words)
         for i in range(n):
             word = words[i]
-            if "-" in word:
+            tmp_word = word.replace('-', '')
+            cur_tag = self.__ma.parse(tmp_word)[0]
+            if "-" in word and WordsExtractor.is_service_word(tmp_word, cur_tag.tag.POS):
                 tag = OpencorporaTag("PRCL")
                 word = word.replace('-', '')
                 words[i] = word
                 morph_item = MorphologicalItem(tag, word, word, False, False)
             else:
+                word = tmp_word
+                words[i] = word
                 tag = self.__ma.parse(word)[0]
                 morph_item = MorphologicalItem(tag.tag, tag.normal_form, tag.word, False)
                 if WordsExtractor.is_service_word(word, tag.tag.POS) is True:

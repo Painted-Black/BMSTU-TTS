@@ -23,6 +23,7 @@ class TTS:
 
         sents = self.__lp.process(text)
         syntagmas = self.__pp.process(sents)
+        print(syntagmas)
         for synt in syntagmas:
             allophones.append(self.__phop.process(synt))
         for allophone in allophones:

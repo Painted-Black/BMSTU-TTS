@@ -50,7 +50,8 @@ class StressMarker:
             s_form = stress_form[0].replace(self.main_stress_mark, '')
             s_form = s_form.replace(self.secondary_stress_mark, '')
             stress_tag = analyzer.parse(s_form)[0].tag
-            if stress_tag.POS == morph.tag.POS or len(stress_forms) == 1:
+            if stress_tag.POS == morph.tag.POS or len(stress_forms) == 1 or\
+               (morph.tag.POS == "VERB" and stress_tag.POS == "INFN"):
                 chosen_form = stress_form
         if chosen_form is None:
             return None
