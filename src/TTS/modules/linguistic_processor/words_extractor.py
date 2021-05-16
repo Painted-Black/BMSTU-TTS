@@ -27,7 +27,7 @@ class WordsExtractor:
                 return True
             if count_vowels(word) == 1:
                 return True
-        if part_of_speech == "PRCL":
+        if part_of_speech == "PRCL" or part_of_speech == "CONJ":
             if word == "б" or word == "ж" or word == "ль":
                 return True
             if count_vowels(word) == 1:

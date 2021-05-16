@@ -23,7 +23,6 @@ class TTS:
 
         sents = self.__lp.process(text)
         syntagmas = self.__pp.process(sents)
-        print(syntagmas)
         for synt in syntagmas:
             allophones.append(self.__phop.process(synt))
         for allophone in allophones:
@@ -33,5 +32,5 @@ class TTS:
                 audio.fade_in(audio.duration_seconds)
             else:
                 logging.error("TTS:process(): wav is None")
-
+        audio.set_frame_rate(audio.frame_rate * 2)
         audio.export(self.final_audio_path, format=self.out_format)

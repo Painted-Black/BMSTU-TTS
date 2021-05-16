@@ -80,10 +80,6 @@ class AcousticProcessor:
                     s1 = sc1u.process_by_word(syllables_2[i][j][k])
                     syllables_1[i][j].append(s1[0])
 
-        print(syllables_1)
-        print(syllables_2)
-        print(syllables_3)
-
         for i in range(len(syllables_3)):
             # units
             for j in range(len(syllables_3[i])):

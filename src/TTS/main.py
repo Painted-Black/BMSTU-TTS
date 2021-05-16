@@ -1,5 +1,6 @@
 from tts import TTS
 import logging
+from db_load import load_stress_db
 
 Filename = "./example_input/ex_in1"
 
