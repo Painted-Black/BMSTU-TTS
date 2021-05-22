@@ -41,7 +41,7 @@ class PhonemeAllophoneTranscriptor:
         if idx < 0 or idx >= n:
             return res
         res = phonemes[idx]
-        if Phoneme.is_stress(res):  # or Phoneme.is_pause(res):
+        if Phoneme.is_pause(res) or Phoneme.is_stress(res):
             idx += step
             if idx < 0 or idx >= n:
                 return None

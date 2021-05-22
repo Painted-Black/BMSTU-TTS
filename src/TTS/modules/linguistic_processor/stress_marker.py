@@ -97,5 +97,5 @@ class StressMarker:
                 idx = i
                 break
         if idx is not None:
-            word = word[:idx] + "+" + word[idx:]
+            word = word[:idx+1] + "+" + word[idx+1:]
         return word

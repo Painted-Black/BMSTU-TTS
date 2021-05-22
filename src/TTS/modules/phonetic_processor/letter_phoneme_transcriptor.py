@@ -161,7 +161,8 @@ class LetterPhonemeTranscriptor:
                         pi2 = None
                         if i + 2 <= phonemes_count:
                             pi2 = phonemes[i + 2]
-                        if pi2 is not None and pi2 in self.VoicelessConsonants | self.VoicedV:
+                        # if pi2 is not None and pi2 in self.VoicelessConsonants | self.VoicedV:
+                        if pi2 is None or pi2 in self.VoicelessConsonants | self.VoicedV:
                             phonemes[i] = self.VoicednessDeafnessPairs[pi]
         return phonemes
 
