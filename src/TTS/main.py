@@ -1,19 +1,26 @@
 from tts import TTS
 import logging
-from db_load import load_stress_db
+import sys
 
-Filename = "./example_input/ex_in1"
+Filename = "./example_input/ex_in2"
 
 
 def main():
-    text = get_text(Filename)
+    if len(sys.argv) != 2:
+        logging.error("Using defaul file path")
+        filename = Filename
+    else:
+        filename = sys.argv[1]
+    text = get_text(filename)
     if text is not None:
         tts = TTS("./output/out.wav", "wav")
         tts.process(text)
+    else:
+        return -1
+    return 0
 
 
 def get_text(filename: str) -> str:
-    #return "Привет"
     try:
         f = open(filename, "r")
     except FileNotFoundError:

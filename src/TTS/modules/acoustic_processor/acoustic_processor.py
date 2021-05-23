@@ -28,6 +28,7 @@ class AcousticProcessor:
             3 -- только слоговой комплекс 3-го типа
             4 -- наилучший возможный вариант
         """
+        print(allophones)
         final_audio = None
         if mode == 0:
             final_audio = self.__process_allophone(allophones)

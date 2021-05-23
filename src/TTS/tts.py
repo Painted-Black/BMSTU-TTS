@@ -2,14 +2,13 @@ from modules.linguistic_processor.linguistic_text_processor import LinguisticTex
 from modules.prosodic_processor.prosodic_processor import ProsodicProcessor
 from modules.acoustic_processor.acoustic_processor import AcousticProcessor
 from modules.phonetic_processor.phonetic_processor import PhoneticProcessor
-from PyQt5.QtCore import pyqtSignal
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtCore import pyqtSignal, QObject
 
 from pydub import AudioSegment
 import logging
 
 
-class TTS(QWidget):
+class TTS(QObject):
     eventSignal = pyqtSignal(str, int)
     workDone = pyqtSignal()
 
@@ -39,7 +38,7 @@ class TTS(QWidget):
 
         self.eventSignal.emit("Работает акустический процессор...", 64)
         for allophone in allophones:
-            wav = self.__ap.process(allophone, 4)
+            wav = self.__ap.process(allophone, 0)
             if wav is not None:
                 audio += wav
                 if audio.duration_seconds != 0:

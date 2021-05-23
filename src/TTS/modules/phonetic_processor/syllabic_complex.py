@@ -138,6 +138,9 @@ class SyllabicUnit(ABC):
             new_syllable = syllable[idx+1:]
         else:
             new_syllable = syllable
+        if self._contains_only_consonants(new_syllable):
+            to_remove += new_syllable
+            new_syllable = []
         return to_remove, new_syllable
 
     def _split_syllables(self, units: [[Allophone]]):
@@ -159,7 +162,6 @@ class SyllabicUnit(ABC):
                     syllables.append([])
                 a = 1
         syllables = self._delete_empty_elements(syllables)
-        print(syllables)
         return syllables
 
     def _split_syntagmas(self, allophones: [Allophone]) -> [[Allophone]]:
@@ -210,3 +212,11 @@ class SyllabicUnit(ABC):
         if n >= 0:
             last = arr[n]
         return last
+
+    def _contains_only_consonants(self, arr: [Allophone]) -> bool:
+        res = True
+        for a in arr:
+            if a.is_vowel() is True:
+                res = False
+                break
+        return res
