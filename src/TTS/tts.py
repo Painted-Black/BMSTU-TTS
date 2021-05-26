@@ -22,7 +22,7 @@ class TTS(QObject):
         self.final_audio_path = final_audio_path
         self.out_format = out_format
 
-    def process(self, text: str):
+    def process(self, text: str, mode: int):
         self.eventSignal.emit("Начинаю...", 0)
         allophones = []
         audio = AudioSegment.empty()
@@ -38,7 +38,7 @@ class TTS(QObject):
 
         self.eventSignal.emit("Работает акустический процессор...", 64)
         for allophone in allophones:
-            wav = self.__ap.process(allophone, 0)
+            wav = self.__ap.process(allophone, mode)
             if wav is not None:
                 audio += wav
                 if audio.duration_seconds != 0:

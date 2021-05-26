@@ -60,9 +60,16 @@ class App(QMainWindow):
         self.ui.progressBar.show()
         self.ui.wait_label.show()
         logging.warning("Thread started")
-        thread = threading.Thread(target=self.__thread_function, args=(self.tts,))
+        mode = self.__get_mode()
+        thread = threading.Thread(target=self.__thread_function, args=(self.tts, mode))
         thread.start()
         logging.warning("Thread joined")
+
+    def __get_mode(self):
+        mode = 0
+        if self.ui.radioButton_allosyl.isChecked():
+            mode = 4
+        return mode
 
     def __on_listen_clicked(self):
         if self.player.state() == QMediaPlayer.PlayingState:
@@ -75,8 +82,8 @@ class App(QMainWindow):
             self.player.setMedia(media_content)
             self.player.play()
 
-    def __thread_function(self, tts):
-        tts.process(self.text)
+    def __thread_function(self, tts, mode):
+        tts.process(self.text, mode)
 
     def __on_chose_file_clicked(self):
         fname = QFileDialog.getOpenFileName(self, "Open file")[0]

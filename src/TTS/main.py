@@ -3,6 +3,7 @@ import logging
 import sys
 
 Filename = "./example_input/ex_in2"
+Mode = 4
 
 
 def main():
@@ -14,7 +15,7 @@ def main():
     text = get_text(filename)
     if text is not None:
         tts = TTS("./output/out.wav", "wav")
-        tts.process(text)
+        tts.process(text, Mode)
     else:
         return -1
     return 0
