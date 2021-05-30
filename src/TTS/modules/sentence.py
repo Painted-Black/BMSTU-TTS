@@ -10,6 +10,7 @@ class Sentence:
     phonetic_words = []
     stressed_words = []
     tags = []
+    punct_words = []
 
     def __init__(self, text: str):
         self.raw_data = text.strip()

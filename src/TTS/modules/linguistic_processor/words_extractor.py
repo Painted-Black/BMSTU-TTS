@@ -12,6 +12,7 @@ class WordsExtractor:
         n = len(sents)
         for i in range(n):
             buf = word_tokenize(sents[i].raw_data)
+            sents[i].punct_words = buf
             corrected_buf = []
             for b in buf:
                 if not (len(b) == 1 and b[0] in PunctuationMarks):
