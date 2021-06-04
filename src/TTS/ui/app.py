@@ -24,6 +24,7 @@ class App(QMainWindow):
         self.ui.img_label.hide()
         self.ui.file_res_label.hide()
         self.ui.listen_pushButton.hide()
+        self.ui.radioButton_allosyl.setChecked(True)
         self.text = ""
         self.tts = TTS(self.filename, "wav")
         self.tts.eventSignal.connect(self.progress_signal)

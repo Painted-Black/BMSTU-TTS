@@ -157,7 +157,7 @@
        </font>
       </property>
       <property name="title">
-       <string>GroupBox</string>
+       <string/>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
