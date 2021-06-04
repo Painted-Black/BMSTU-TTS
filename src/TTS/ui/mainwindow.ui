@@ -15,19 +15,19 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="6" column="1" colspan="2">
-     <widget class="QLabel" name="wait_label">
+    <item row="4" column="2">
+     <widget class="QToolButton" name="file_toolButton">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>Пожалуйста, подождите...</string>
+       <string>...</string>
       </property>
      </widget>
     </item>
-    <item row="5" column="1" colspan="2">
+    <item row="6" column="1" colspan="2">
      <widget class="QPushButton" name="run_pushButton">
       <property name="font">
        <font>
@@ -39,19 +39,19 @@
       </property>
      </widget>
     </item>
-    <item row="7" column="1" colspan="2">
-     <widget class="QProgressBar" name="progressBar">
+    <item row="0" column="1" colspan="2">
+     <widget class="QLabel" name="label">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
        </font>
       </property>
-      <property name="value">
-       <number>24</number>
+      <property name="text">
+       <string>Введите текст:</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item row="4" column="1">
      <widget class="QLabel" name="fname_label">
       <property name="font">
        <font>
@@ -61,6 +61,34 @@
       <property name="text">
        <string/>
       </property>
+     </widget>
+    </item>
+    <item row="5" column="1" colspan="2">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="title">
+       <string>Исходные элементы:</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QRadioButton" name="radioButton_allophones">
+         <property name="text">
+          <string>только аллофоны</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="radioButton_allosyl">
+         <property name="text">
+          <string>аллофоны+аллослоги</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </item>
     <item row="9" column="1" colspan="2">
@@ -78,22 +106,34 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="file_res_label">
-        <property name="maximumSize">
-         <size>
-          <width>500</width>
-          <height>100</height>
-         </size>
+       <widget class="QScrollArea" name="scrollArea">
+        <property name="widgetResizable">
+         <bool>true</bool>
         </property>
-        <property name="font">
-         <font>
-          <pointsize>12</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>543</width>
+           <height>68</height>
+          </rect>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="file_res_label">
+            <property name="font">
+             <font>
+              <pointsize>16</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>TextLabel</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
       <item>
@@ -128,19 +168,19 @@
       </item>
      </layout>
     </item>
-    <item row="3" column="2">
-     <widget class="QToolButton" name="file_toolButton">
+    <item row="7" column="1" colspan="2">
+     <widget class="QLabel" name="wait_label">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
        </font>
       </property>
       <property name="text">
-       <string>...</string>
+       <string>Пожалуйста, подождите...</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1" colspan="2">
+    <item row="1" column="1" colspan="2">
      <widget class="QPlainTextEdit" name="plainTextEdit">
       <property name="font">
        <font>
@@ -149,32 +189,16 @@
       </property>
      </widget>
     </item>
-    <item row="4" column="1" colspan="2">
-     <widget class="QGroupBox" name="groupBox">
+    <item row="8" column="1" colspan="2">
+     <widget class="QProgressBar" name="progressBar">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
        </font>
       </property>
-      <property name="title">
-       <string/>
+      <property name="value">
+       <number>24</number>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QRadioButton" name="radioButton_allophones">
-         <property name="text">
-          <string>только аллофоны</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QRadioButton" name="radioButton_allosyl">
-         <property name="text">
-          <string>аллофоны+аллослоги</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </item>
    </layout>
