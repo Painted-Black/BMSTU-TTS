@@ -107,6 +107,15 @@
       </item>
       <item>
        <widget class="QScrollArea" name="scrollArea">
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAsNeeded</enum>
+        </property>
         <property name="widgetResizable">
          <bool>true</bool>
         </property>
@@ -116,7 +125,7 @@
            <x>0</x>
            <y>0</y>
            <width>543</width>
-           <height>68</height>
+           <height>48</height>
           </rect>
          </property>
          <layout class="QHBoxLayout" name="horizontalLayout_2">
