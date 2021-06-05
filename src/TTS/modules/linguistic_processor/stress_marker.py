@@ -15,6 +15,9 @@ class StressMarker:
         for i in range(n):
             word = words[i]
             tag = morphs[i]
+            if tag.tag.__repr__() == "OpencorporaTag('PNCT')":
+                stresses.append(word)
+                continue
             if tag.is_stressed is True:
                 stress = self.__get_stress(tag)
                 stresses.append(stress)

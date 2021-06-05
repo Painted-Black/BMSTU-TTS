@@ -16,4 +16,3 @@ if __name__ == '__main__':
     test_runner.run(syllable_suite)
     test_runner.run(lpt_suite)
     test_runner.run(pat_suite)
-    # unittest.main()

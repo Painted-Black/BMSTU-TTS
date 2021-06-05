@@ -14,6 +14,8 @@ from modules.tts_exceptions.tts_exceptions import WrongPunctuationException, LTP
 
 import logging
 
+# Тест (предложения) со скобками.
+
 
 class LinguisticTextProcessor:
     def __init__(self):
@@ -82,8 +84,8 @@ class LinguisticTextProcessor:
     def __split_hyphen_words(self, sents):
         for sent in sents:
             new_sent_words = []
-            for i in range(len(sent.words)):
-                word = sent.words[i]
+            for i in range(len(sent.punct_words)):
+                word = sent.punct_words[i]
                 if "-" in word:
                     parts = word.split('-')
                     if len(parts) != 2:
@@ -94,7 +96,7 @@ class LinguisticTextProcessor:
                     new_sent_words.append(parts[1])
                 else:
                     new_sent_words.append(word)
-            sent.words = new_sent_words
+            sent.punct_words = new_sent_words
 
     def __remove_punct_marks(self, words: [str]) -> [str]:
         res = []
@@ -110,21 +112,22 @@ class LinguisticTextProcessor:
 
     def __mark_tags(self, sents: []):
         for sent in sents:
-            tags = self.__morph_tagger.tag(sent.words)
+            tags = self.__morph_tagger.tag(sent.punct_words)
             sent.tags = tags
 
     def __mark_stress(self, sents):
         for sent in sents:
-            stressed_words = self.__stress_marker.mark(sent.words, sent.tags)
+            stressed_words = self.__stress_marker.mark(sent.punct_words, sent.tags)
             sent.stressed_words = stressed_words
 
     def __correct_jo(self, sents: []):
         for sent in sents:
-            corrected_wotds = self.__jo_corrector.correct(sent.words)
-            sent.words = corrected_wotds
+            corrected_words = self.__jo_corrector.correct(sent.punct_words)
+            sent.words = corrected_words
 
     def __lower_sents(self, sents: []):
         for sent in sents:
+            self.__lower_words(sent.punct_words)
             self.__lower_words(sent.words)
 
     def __lower_words(self, words: [str]) -> [str]:

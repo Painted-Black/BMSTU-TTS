@@ -27,9 +27,9 @@ class AbbreviationsExtractor:
             logging.error('Unable to connect to abbreviations database')
             return None
         for sent in sents:
-            n = len(sent.words)
+            n = len(sent.punct_words)
             for i in range(n):
-                word = sent.words[i]
+                word = sent.punct_words[i]
                 res = re.finditer(self.AbbreviationsPattern, word)
                 for match in res:
                     abbr = match.group(0)
@@ -45,7 +45,7 @@ class AbbreviationsExtractor:
                     else:
                         pronunciation = self.__pronounce_unknown_abbrev(abbr)
                     if pronunciation is not None:
-                        sent.words[i] = pronunciation
+                        sent.punct_words[i] = pronunciation
                         sent.tags[i].is_abbrev = True
                         sent.tags[i].is_stressed = False
         return sents
